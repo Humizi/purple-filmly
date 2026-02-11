@@ -1,0 +1,12 @@
+<div class="input-wrapper">
+  <img [src]="icon" alt="icon" class="input-icon" />
+
+  <input
+    class="input-control"
+    [type]="type"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [(ngModel)]="value"
+    (input)="onInput($event.target.value)"
+  />
+</div>
