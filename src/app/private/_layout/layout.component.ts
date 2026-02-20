@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-public-layout-component',
-  imports: [NgOptimizedImage, RouterOutlet],
+  selector: 'app-private-layout-component',
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
   standalone: true,
+  imports: [RouterOutlet],
 })
-export class PublicLayoutComponent {}
+export class PrivateLayoutComponent {}
