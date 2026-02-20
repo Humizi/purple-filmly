@@ -1,0 +1,9 @@
+<ul>
+  @for (item of items; track $index) {
+    <li>
+      <a [routerLink]="item.link">
+        {{ item.text }}
+      </a>
+    </li>
+  }
+</ul>

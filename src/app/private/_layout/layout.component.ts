@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuComponent } from '../components/menu/menu.component';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -6,6 +7,6 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, MenuComponent],
 })
 export class PrivateLayoutComponent {}
