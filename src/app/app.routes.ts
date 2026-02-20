@@ -1,3 +1,4 @@
+import { AuthGuard } from './shared/guards/auth.guard';
 import { FavoritesComponent } from './private/pages/favorites/favorites.component';
 import { HomeComponent } from './private/pages/home/home.component';
 import { LoginComponent } from './public/pages/login/login.component';
@@ -23,6 +24,7 @@ export const routes: Routes = [
   {
     path: 'private',
     component: PrivateLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'home',
