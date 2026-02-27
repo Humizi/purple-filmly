@@ -1,1 +1,3 @@
-<p>home-component works!</p>
+@for (item of movies; track $index) {
+  <app-card-component [data]="item" />
+}
