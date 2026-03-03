@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MENU_ITEMS } from './menu.models';
+import { GENRES } from '../../../shared/const/genres.const';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -10,5 +10,5 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
 })
 export class MenuComponent {
-  public readonly items = MENU_ITEMS;
+  public readonly items = GENRES;
 }
