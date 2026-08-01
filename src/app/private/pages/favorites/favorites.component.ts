@@ -1,18 +1,18 @@
 import { Component, inject } from '@angular/core';
 
-import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../components/card/card.component';
-import { FavoritesService } from '../../../shared/services/favorites.service';
+import { StoreService } from '../../../shared/services/store/store.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-favorites-component',
   standalone: true,
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.scss',
-  imports: [CardComponent, AsyncPipe],
+  imports: [CardComponent],
 })
 export class FavoritesComponent {
-  private favoritesService = inject(FavoritesService);
+  private storeService = inject(StoreService);
 
-  public readonly items = this.favoritesService.getFavorites();
+  public readonly items = toSignal(this.storeService.getValueAsync('favorites'));
 }
