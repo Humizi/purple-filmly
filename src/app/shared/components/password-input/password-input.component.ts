@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
@@ -10,12 +10,12 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule],
 })
 export class PasswordInputComponent {
-  @Input() placeholder = '';
-  @Input() disabled = false;
-  @Input() icon: string | null = null;
-  @Input() value: string | null = null;
+  placeholder = input('');
+  disabled = input(false);
+  icon = input<string | null>(null);
+  value = input<string | null>(null);
 
-  @Output() controlValue = new EventEmitter<string | null>();
+  controlValue = output<string | null>();
 
   type: 'text' | 'password' = 'password';
 

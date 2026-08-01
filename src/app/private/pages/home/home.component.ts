@@ -1,14 +1,18 @@
+import { Component, inject } from '@angular/core';
+
+import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../components/card/card.component';
-import { Component } from '@angular/core';
-import { MOVIES } from '../../../shared/const/fake-films.const';
+import { MoviesService } from '../../../shared/services/movies.service';
 
 @Component({
   selector: 'app-home-component',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, AsyncPipe],
 })
 export class HomeComponent {
-  public movies = MOVIES;
+  private moviesService = inject(MoviesService);
+
+  public movies = this.moviesService.getMovies();
 }
