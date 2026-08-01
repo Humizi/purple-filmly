@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 import { IMovie } from '../../../shared/models/movie.model';
 
@@ -9,5 +9,5 @@ import { IMovie } from '../../../shared/models/movie.model';
   standalone: true,
 })
 export class CardComponent {
-  @Input() data!: IMovie;
+  data = input.required<IMovie>();
 }

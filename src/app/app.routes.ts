@@ -12,6 +12,7 @@ export const routes: Routes = [
     component: PublicLayoutComponent,
     children: [
       {
+        title: 'Логин',
         path: 'login',
         component: LoginComponent,
       },
@@ -27,10 +28,12 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
+        title: 'Дашборд',
         path: 'home',
         component: HomeComponent,
       },
       {
+        title: 'Избранное',
         path: 'favorites',
         component: FavoritesComponent,
       },

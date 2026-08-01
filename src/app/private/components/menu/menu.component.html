@@ -1,5 +1,5 @@
 <ul>
-  @for (item of items; track $index) {
+  @for (item of items | async; track $index) {
     <li>
       <a [routerLink]="'/private/' + item.slug">
         {{ item.name }}

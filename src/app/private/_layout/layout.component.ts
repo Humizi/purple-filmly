@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HeaderComponent } from '../components/header/header.component';
 import { MenuComponent } from '../components/menu/menu.component';
 import { RouterOutlet } from '@angular/router';
 
@@ -7,6 +8,6 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
   standalone: true,
-  imports: [RouterOutlet, MenuComponent],
+  imports: [RouterOutlet, MenuComponent, HeaderComponent],
 })
 export class PrivateLayoutComponent {}

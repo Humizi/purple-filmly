@@ -2,10 +2,22 @@
   <h2 class="login__title">Вход</h2>
 
   <div class="login__form-fields">
-    <app-input-component icon="icons/user.svg" placeholder="Email" />
+    <app-input-component
+      icon="icons/user.svg"
+      placeholder="Email"
+      (controlValue)="onInputChange('username', $event)"
+    />
 
-    <app-password-input-component icon="icons/lock.svg" placeholder="Пароль" />
+    <app-password-input-component
+      icon="icons/lock.svg"
+      placeholder="Пароль"
+      (controlValue)="onInputChange('password', $event)"
+    />
   </div>
 
-  <app-button routerLink="/private" text="Войти" />
+  @if (error) {
+    <div class="login__form--errors">{{ error }}</div>
+  }
+
+  <app-button text="Войти" (btnClick)="onLoginClick()" />
 </form>
