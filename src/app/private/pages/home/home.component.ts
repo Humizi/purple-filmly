@@ -1,18 +1,18 @@
 import { Component, inject } from '@angular/core';
 
-import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../components/card/card.component';
-import { MoviesService } from '../../../shared/services/movies.service';
+import { StoreService } from '../../../shared/services/store/store.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home-component',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   standalone: true,
-  imports: [CardComponent, AsyncPipe],
+  imports: [CardComponent],
 })
 export class HomeComponent {
-  private moviesService = inject(MoviesService);
+  private storeService = inject(StoreService);
 
-  public movies = this.moviesService.getMovies();
+  public readonly movies = toSignal(this.storeService.getValueAsync('movies'));
 }
