@@ -27,12 +27,21 @@ export class FiltersComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    const savedFilters = {
+      search: this.storeService.getValue('filters').name ?? '',
+      genre: this.storeService.getValue('filters').genre ?? '',
+    };
+
+    this.form.patchValue(savedFilters, {
+      emitEvent: false,
+    });
+
     this.form.valueChanges
       .pipe(
         debounceTime(500),
         tap((data) => {
-          this.storeService.setFormValue('name', data.search!);
-          this.storeService.setFormValue('genre', data.genre!);
+          this.storeService.setFormValue('name', data.search ?? '');
+          this.storeService.setFormValue('genre', data.genre ?? '');
         }),
         takeUntilDestroyed(this._destroyRef),
       )
