@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required, Validators.email],
     }),
-    password: new FormControl('', { nonNullable: true }),
+    password: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
   });
 
   ngOnInit(): void {
