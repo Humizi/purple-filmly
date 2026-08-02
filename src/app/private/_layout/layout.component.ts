@@ -2,9 +2,9 @@ import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { combineLatest, tap } from 'rxjs';
 
 import { FavoritesService } from '../../shared/services/favorites.service';
+import { FiltersComponent } from '../components/filters/filters.component';
 import { GenresService } from '../../shared/services/genres.service';
 import { HeaderComponent } from '../components/header/header.component';
-import { MenuComponent } from '../components/menu/menu.component';
 import { MoviesService } from '../../shared/services/movies.service';
 import { RouterOutlet } from '@angular/router';
 import { StoreService } from '../../shared/services/store/store.service';
@@ -15,7 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
   standalone: true,
-  imports: [RouterOutlet, MenuComponent, HeaderComponent],
+  imports: [RouterOutlet, FiltersComponent, HeaderComponent],
 })
 export class PrivateLayoutComponent implements OnInit {
   private storeService = inject(StoreService);

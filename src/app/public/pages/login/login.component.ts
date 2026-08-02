@@ -1,4 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { catchError, of, take, tap } from 'rxjs';
 
 import { AuthService } from '../../../shared/services/auth.service';
@@ -6,34 +13,48 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 import { InputComponent } from '../../../shared/components/input/input.component';
 import { PasswordInputComponent } from '../../../shared/components/password-input/password-input.component';
 import { Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login-component',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
-  imports: [ButtonComponent, InputComponent, PasswordInputComponent],
+  imports: [
+    ButtonComponent,
+    InputComponent,
+    PasswordInputComponent,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   standalone: true,
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private _authService = inject(AuthService);
   private _router = inject(Router);
-  private _formValue: { username: string | null; password: string | null } = {
-    username: null,
-    password: null,
-  };
+  private _destroyRef = inject(DestroyRef);
   error: string | null = null;
 
-  onInputChange(ctrl: 'username' | 'password', value: string | null): void {
-    this._formValue[ctrl] = value;
+  form = new FormGroup({
+    email: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email],
+    }),
+    password: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+  });
+
+  ngOnInit(): void {
+    this.form.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe();
   }
 
   onLoginClick(): void {
-    if (this._formValue.username === null || this._formValue.password === null) {
+    const form = this.form.getRawValue();
+
+    if (form.email === null || form.password === null) {
       return;
     }
 
     this._authService
-      .login$(this._formValue.username, this._formValue.password)
+      .login$(form.email, form.password)
       .pipe(
         take(1),
         tap(() => this._router.navigate(['private'])),

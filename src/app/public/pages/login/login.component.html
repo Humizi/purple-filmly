@@ -1,23 +1,27 @@
 <form class="login__form">
   <h2 class="login__title">Вход</h2>
 
-  <div class="login__form-fields">
-    <app-input-component
-      icon="icons/user.svg"
-      placeholder="Email"
-      (controlValue)="onInputChange('username', $event)"
-    />
+  <form class="login__form-fields" [formGroup]="form">
+    <app-input-component icon="icons/user.svg" placeholder="Email" formControlName="email" />
 
     <app-password-input-component
       icon="icons/lock.svg"
       placeholder="Пароль"
-      (controlValue)="onInputChange('password', $event)"
+      formControlName="password"
     />
-  </div>
+  </form>
 
   @if (error) {
     <div class="login__form--errors">{{ error }}</div>
   }
 
-  <app-button text="Войти" (btnClick)="onLoginClick()" />
+  @if (form.controls.email.invalid) {
+    <div class="login__form--errors">Невалидный Email</div>
+  }
+
+  @if (form.controls.password.invalid) {
+    <div class="login__form--errors">Введите пароль</div>
+  }
+
+  <app-button text="Войти" (btnClick)="onLoginClick()" [disabled]="this.form.invalid" />
 </form>

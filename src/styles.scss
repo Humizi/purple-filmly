@@ -1,4 +1,6 @@
 * {
+  box-sizing: border-box;
+
   padding: 0;
   margin: 0;
   font-family: 'Open Sans', sans-serif;
@@ -9,4 +11,9 @@
 html,
 body {
   height: 100%;
+}
+
+img {
+  width: auto;
+  height: auto;
 }
