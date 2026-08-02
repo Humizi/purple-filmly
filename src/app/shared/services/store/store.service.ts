@@ -26,4 +26,17 @@ export class StoreService {
       [key]: value,
     });
   }
+
+  public setFormValue<K extends keyof IAppStore['filters']>(
+    key: K,
+    value: IAppStore['filters'][K],
+  ): void {
+    this.storeSubject.next({
+      ...this.storeSubject.getValue(),
+      filters: {
+        ...this.storeSubject.getValue().filters,
+        [key]: value,
+      },
+    });
+  }
 }

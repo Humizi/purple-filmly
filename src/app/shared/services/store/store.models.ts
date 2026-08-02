@@ -8,7 +8,7 @@ export interface IAppStore {
 
   filters: {
     name: string;
-    genre: number | null;
+    genre: string | null;
     from: number | null;
     to: number | null;
     sort: 'genre' | 'name' | 'rating';

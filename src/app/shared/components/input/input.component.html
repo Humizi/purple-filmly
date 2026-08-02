@@ -1,5 +1,7 @@
 <div class="input-wrapper">
-  <img [ngSrc]="icon()" alt="icon" class="input-icon" />
+  @if (icon()) {
+    <img [ngSrc]="icon()" width="24" height="24" alt="icon" class="input-icon" />
+  }
 
   <input
     class="input-control"

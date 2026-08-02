@@ -1,0 +1,11 @@
+<form [formGroup]="form">
+  <app-input-component placeholder="Поиск" formControlName="search" />
+
+  <ul>
+    @for (item of items(); track $index) {
+      <li>
+        <app-radio-component [label]="item.name" formControlName="genre" [value]="item.name" />
+      </li>
+    }
+  </ul>
+</form>
