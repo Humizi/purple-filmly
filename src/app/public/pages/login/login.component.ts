@@ -32,11 +32,6 @@ export class LoginComponent implements OnInit {
   private _authService = inject(AuthService);
   private _router = inject(Router);
   private _destroyRef = inject(DestroyRef);
-
-  public formValue: { username: string | null; password: string | null } = {
-    username: null,
-    password: null,
-  };
   error: string | null = null;
 
   form = new FormGroup({
@@ -52,12 +47,14 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginClick(): void {
-    if (this.formValue.username === null || this.formValue.password === null) {
+    const form = this.form.getRawValue();
+
+    if (form.email === null || form.password === null) {
       return;
     }
 
     this._authService
-      .login$(this.formValue.username, this.formValue.password)
+      .login$(form.email, form.password)
       .pipe(
         take(1),
         tap(() => this._router.navigate(['private'])),
