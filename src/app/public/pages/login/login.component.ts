@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -13,6 +13,7 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 import { InputComponent } from '../../../shared/components/input/input.component';
 import { PasswordInputComponent } from '../../../shared/components/password-input/password-input.component';
 import { Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login-component',
@@ -27,9 +28,11 @@ import { Router } from '@angular/router';
   ],
   standalone: true,
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private _authService = inject(AuthService);
   private _router = inject(Router);
+  private _destroyRef = inject(DestroyRef);
+
   public formValue: { username: string | null; password: string | null } = {
     username: null,
     password: null,
@@ -43,6 +46,10 @@ export class LoginComponent {
     }),
     password: new FormControl('', { nonNullable: true }),
   });
+
+  ngOnInit(): void {
+    this.form.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe();
+  }
 
   onLoginClick(): void {
     if (this.formValue.username === null || this.formValue.password === null) {

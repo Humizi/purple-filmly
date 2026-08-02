@@ -1,6 +1,7 @@
 import { Component, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { NgOptimizedImage } from '@angular/common';
 import { noop } from 'rxjs';
 
 @Component({
@@ -8,7 +9,7 @@ import { noop } from 'rxjs';
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, NgOptimizedImage],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -23,7 +24,7 @@ export class InputComponent implements ControlValueAccessor {
 
   type = input<'text' | 'email'>('text');
   placeholder = input('');
-  icon = input<string | null>(null);
+  icon = input<string>('');
 
   disabled = signal(false);
   value = signal('');

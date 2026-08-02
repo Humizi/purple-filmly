@@ -15,5 +15,13 @@
     <div class="login__form--errors">{{ error }}</div>
   }
 
-  <app-button text="Войти" (btnClick)="onLoginClick()" />
+  @if (form.controls.email.invalid) {
+    <div class="login__form--errors">Невалидный Email</div>
+  }
+
+  @if (form.controls.password.invalid) {
+    <div class="login__form--errors">Введите пароль</div>
+  }
+
+  <app-button text="Войти" (btnClick)="onLoginClick()" [disabled]="this.form.invalid" />
 </form>

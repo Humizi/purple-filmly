@@ -1,6 +1,7 @@
 import { Component, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { NgOptimizedImage } from '@angular/common';
 import { noop } from 'rxjs';
 
 @Component({
@@ -8,7 +9,7 @@ import { noop } from 'rxjs';
   templateUrl: './password-input.component.html',
   styleUrl: './password-input.component.scss',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, NgOptimizedImage],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -22,7 +23,7 @@ export class PasswordInputComponent implements ControlValueAccessor {
   private onTouched: () => void = noop;
 
   placeholder = input('');
-  icon = input<string | null>(null);
+  icon = input<string>('');
 
   disabled = signal(false);
   value = signal('');
